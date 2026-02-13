@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Chubbyyyy 😘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      min-height: 100vh;
+      overflow-y: auto;
+      color: #333;
+      position: relative;
+    }
+    .container {
+      background: rgba(255,255,255,0.92);
+      padding: 40px 30px;
+      border-radius: 30px;
+      text-align: center;
+      max-width: 90%;
+      width: 520px;
+      margin: 20px auto;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      z-index: 10;
+      overflow-y: auto;
+      max-height: 90vh;
+      padding-bottom: 80px;
+    }
+    h1, h2 {
+      font-family: 'Comic Neue', cursive;
+      color: #e74c3c;
+    }
+    .journey, .letter-text {
+      font-size: 16px;
+      color: #444;
+      margin: 20px 0;
+      line-height: 1.6;
+      text-align: left;
+    }
+    .letter-text {
+      background: #fff;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+    .emoji-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      object-fit: cover;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 35px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 15px 60px;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .yes-btn { background: #e74c3c; color: white; }
+    .no-btn { background: #3498db; color: white; }
+    .back-btn {
+      background: #e74c3c;
+      color: white;
+      padding: 15px 50px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      margin-top: 30px;
+    }
+    .back-btn:hover { transform: scale(1.05); }
+    .quiz-option {
+      display: block;
+      padding: 15px;
+      margin: 12px auto;
+      width: 80%;
+      border-radius: 50px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+      border: 2px solid #e74c3c;
+      color: #e74c3c;
+    }
+    .quiz-option:hover { background: #ffebee; }
+    .gifts-grid {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+    .gift-item {
+      text-align: center;
+      cursor: pointer;
+      width: 120px;
+    }
+    .gift-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px 0;
+    }
+    .gallery-item {
+      text-align: center;
+      width: 180px;
+    }
+    .gallery-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border: 10px solid white;
+    }
+    .hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .heart {
+      position: absolute;
+      font-size: 25px;
+      animation: float 10s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes float {
+      0% { transform: translateY(110vh) rotate(0deg); }
+      100% { transform: translateY(-20vh) rotate(720deg); }
+    }
+    .hidden { display: none !important; }
+    .wrong-toast {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(231, 76, 60, 0.95);
+      color: white;
+      padding: 25px 50px;
+      border-radius: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+    .wrong-toast.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- Will you be mine -->
+<div class="container" id="will">
+  <img class="emoji-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.43.03 AM (6).jpeg" alt="Cute couple">
+  <h1>Will you be mine? 🥺</h1>
+  <p class="journey">Life is an incredible journey, and I want to spend every single second of it with you.</p>
+  <div class="buttons">
+    <button class="yes-btn" onclick="show('happy')">YES</button>
+    <button class="no-btn" onclick="show('think')">NO</button>
+  </div>
+</div>
+
+<!-- Think again -->
+<div class="container hidden" id="think">
+  <img class="emoji-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.43.03 AM (2).jpeg" alt="Sad chubby bear">
+  <h2>Think again 😭</h2>
+  <p class="journey">Life is an incredible journey, and I want to spend every single second of it with you.</p>
+  <div class="buttons">
+    <button class="yes-btn" onclick="show('happy')">YES</button>
+    <button class="no-btn" onclick="show('sure')">NO</button>
+  </div>
+</div>
+
+<!-- Are you sure -->
+<div class="container hidden" id="sure">
+  <img class="emoji-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.43.03 AM (1).jpeg" alt="Confused bear">
+  <h2>Are You sure 😠?</h2>
+  <p class="journey">Life is an incredible journey, and I want to spend every single second of it with you.</p>
+  <div class="buttons">
+    <button class="yes-btn" onclick="show('happy')">YES</button>
+    <button class="no-btn" id="noSure" style="transition: all 0.5s;">NO</button>
+  </div>
+</div>
+
+<!-- See This -->
+<div class="container hidden" id="seeThis">
+  <img class="emoji-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.43.03 AM.jpeg" alt="Cute cat">
+  <h1>See This 😭</h1>
+  <p class="journey">Life is an incredible journey, and I want to spend every single second of it with you.</p>
+  <button class="yes-btn" style="padding:20px 100px; font-size:26px;" onclick="show('happy')">YES</button>
+</div>
+
+<!-- Happy Valentine's Day -->
+<div class="container hidden" id="happy">
+  <img class="emoji-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.43.03 AM (5).jpeg" alt="Couple hug">
+  <h1>Happy Valentine's Day Baby! 💖💍</h1>
+  <p class="journey" style="font-size:18px; color:#c0392b;">Every second with you is a celebration. You are the spark that makes my world so much brighter! 🥰</p>
+  <button style="margin-top:30px; padding:18px 70px; font-size:20px; background:#ff69b4; color:white; border:none; border-radius:50px;" onclick="show('gifts')">SEE MY GIFTS →</button>
+</div>
+
+<!-- Gifts page -->
+<div class="container hidden" id="gifts">
+  <h1>Something for You</h1>
+  <div class="gifts-grid">
+    <div class="gift-item" onclick="show('quizBoss')">
+      <img class="gift-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.43.03 AM (3).jpeg" alt="Gift 1">
+      <p>Gift 1</p>
+    </div>
+    <div class="gift-item" onclick="show('letter')">
+      <img class="gift-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.43.03 AM (4).jpeg" alt="Gift 2">
+      <p>Gift 2</p>
+    </div>
+    <div class="gift-item" onclick="show('gallery')">
+      <img class="gift-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 8.58.50 AM.jpeg" alt="Gift 3">
+      <p>Gift 3</p>
+    </div>
+  </div>
+  <button style="margin-top:50px; padding:18px 80px; font-size:22px; background:#e74c3c; color:white; border:none; border-radius:50px; cursor:pointer;" onclick="show('forever')">FINALLY...</button>
+</div>
+
+<!-- Letter for You (Gift 2) -->
+<div class="container hidden" id="letter">
+  <img class="emoji-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 9.06.42 AM.jpeg" alt="My Chubbyyyyy">
+  <h1>A Letter For You 🥺</h1>
+  <div class="letter-text">
+    My Chubbyyyyy,<br><br>
+    Thank you for being my person. I want to hold your hand through every season of life. You are my home. You are my everything , and I love you so so much. Be the same as you are and no sorry for irritating you. No one can replace you from my heart , ur always be my no.1 .<br><br>
+    Forever yours. ❤️🫂
+  </div>
+  <button class="back-btn" onclick="show('gifts')">--BACK--</button>
+</div>
+
+<!-- Quiz 1: Boss -->
+<div class="container hidden" id="quizBoss">
+  <h2>Quiz for you 😘</h2>
+  <p>Who is the absolute 'Boss' in this relationship? 😉</p>
+  <div style="margin:20px 0;">
+    <div class="quiz-option" onclick="show('quizFights')">Obviously You</div>
+    <div class="quiz-option" onclick="wrongAnswer(this)">Me</div>
+    <div class="quiz-option" onclick="wrongAnswer(this)">My Mom</div>
+  </div>
+  <button class="back-btn" onclick="show('gifts')">--BACK--</button>
+</div>
+
+<!-- Quiz 2: Fights -->
+<div class="container hidden" id="quizFights">
+  <h2>Quiz for you 😘</h2>
+  <p>Who fights a lot in this relationship? 😏</p>
+  <div style="margin:20px 0;">
+    <div class="quiz-option" onclick="wrongAnswer(this)">Always You</div>
+    <div class="quiz-option" onclick="show('quizLife')">No One</div>
+    <div class="quiz-option" onclick="wrongAnswer(this)">Me</div>
+  </div>
+  <button class="back-btn" onclick="show('gifts')">--BACK--</button>
+</div>
+
+<!-- Quiz 3: Life -->
+<div class="container hidden" id="quizLife">
+  <h2>Quiz for you 😘</h2>
+  <p>Where do I plan to spend the rest of my life? 🥰</p>
+  <div style="margin:20px 0;">
+    <div class="quiz-option" onclick="wrongAnswer(this)">Paris</div>
+    <div class="quiz-option" onclick="show('passed')">In Your Heart</div>
+    <div class="quiz-option" onclick="wrongAnswer(this)">On Mars</div>
+  </div>
+  <button class="back-btn" onclick="show('gifts')">--BACK--</button>
+</div>
+
+<!-- Passed page -->
+<div class="container hidden" id="passed">
+  <h2>Quiz for you 😘</h2>
+  <div style="background:#fff; padding:25px; border-radius:20px; margin:25px auto; max-width:90%; box-shadow:0 5px 15px rgba(0,0,0,0.1); font-size:18px;">
+    Yay! You passed the test! You really love me 😍❤️
+  </div>
+  <button class="back-btn" onclick="show('gifts')">--BACK--</button>
+</div>
+
+<!-- Gallery page (Gift 3) -->
+<div class="container hidden" id="gallery">
+  <h1>Look at this cutie 🥺😭</h1>
+  <p style="font-size:18px; color:#c0392b; margin-bottom:30px;">Forever Us ❤️🫂</p>
+  <div class="gallery-grid">
+    <!-- Replace with your pic links -->
+    <div class="gallery-item"><img class="gallery-img" src="C:\Valentines day Project\pics\IMG-20250522-WA0064.jpeg" alt="Sweet Hello"><p>Sweet Hello</p></div>
+    <div class="gallery-item"><img class="gallery-img" src="C:\Valentines day Project\pics\IMG_1900.JPG" alt="True Smile"><p>True Smile</p></div>
+    <div class="gallery-item"><img class="gallery-img" src="C:\Users\user\Downloads\IMG_1895.JPG" alt="Perfect Day"><p>Perfect Day</p></div>
+    <div class="gallery-item"><img class="gallery-img" src="C:\Users\user\Downloads\IMG_1800.jpg" alt="Only Us"><p>Only Us</p></div>
+    <div class="gallery-item"><img class="gallery-img" src="C:\Users\user\Downloads\IMG_1428.jpg" alt="My Home"><p>My Home</p></div>
+    <div class="gallery-item"><img class="gallery-img" src="C:\Valentines day Project\pics\IMG_1901.JPG" alt="Forever Us"><p>Forever Us</p></div>
+  </div>
+  <button class="back-btn" onclick="show('gifts')">--BACK--</button>
+</div>
+
+<!-- Forever final page -->
+<div class="container hidden" id="forever">
+  <img class="emoji-img" src="C:\Users\user\Downloads\WhatsApp Image 2026-02-13 at 9.13.46 AM.jpeg" alt="Forever hug">
+  <h1>You are my forever chubbyyyy 😚</h1>
+  
+  <video width="100%" height="auto" autoplay loop muted playsinline style="border-radius:20px; margin:20px 0; box-shadow:0 10px 20px rgba(0,0,0,0.2);">
+    <source src="C:\Valentines day Project\pics\copy_73D608D9-2361-46A9-9E5F-3392192CF85E.mov" type="video/mp4">
+    Your browser doesn't support video.
+  </video>
+  
+  <p style="font-size:18px; color:#c0392b; line-height:1.8; margin:20px 0; text-align:left;">
+    Happy Valentine’s Day chlwoo 😚<br><br>
+    I love you more than words can say. ❤️<br>
+    No matter where life takes us, my heart will always choose you. Thank you for being my peace, my smile, my love. This Valentine’s Day and every day after, I’m grateful to call you mine.<br><br>
+    I love youuu shalima 🫂🤍😚
+  </p>
+  
+  <button class="back-btn" onclick="show('gifts')">--BACK--</button>
+</div>
+
+<script>
+  function createHeart() {
+    const h = document.createElement('div');
+    h.classList.add('heart');
+    h.innerHTML = '❤️';
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.animationDuration = (Math.random()*6 + 8)+'s';
+    document.getElementById('hearts').appendChild(h);
+    setTimeout(()=>h.remove(),15000);
+  }
+  setInterval(createHeart, 500);
+
+  function show(id) {
+    document.querySelectorAll('.container').forEach(c=>c.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  function wrongAnswer(el) {
+    const toast = document.createElement('div');
+    toast.classList.add('wrong-toast');
+    toast.innerHTML = "Thappu dii chlwoo 😏";
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 500);
+    }, 2000);
+  }
+
+  // NO chain fix
+  document.getElementById('noSure').onclick = function() {
+    const noBtn = this;
+    noBtn.style.transform = 'scale(0.4)';
+    noBtn.style.padding = '8px 30px';
+    noBtn.style.fontSize = '14px';
+    setTimeout(() => {
+      noBtn.classList.add('hidden');
+      show('seeThis');
+    }, 800);
+  };
+
+  show('will');
+</script>
+</body>
+</html>
